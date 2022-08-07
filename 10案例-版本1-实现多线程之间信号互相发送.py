@@ -20,12 +20,13 @@ class MainWindow(QWidget):
     def __init__(self):
         super(MainWindow, self).__init__()
         # 加载ui界面，将按键和界面绑定
-        self.ui = uic.loadUi('./login.ui')
+        self.ui = uic.loadUi(sys.argv[0] + '/../login.ui')
         self.username = self.ui.user_edit
         self.password = self.ui.pwd_edit
         self.login_btn = self.ui.login_button
         self.clear_btn = self.ui.password_button
         self.msg_edit = self.ui.msg_edit
+        print()
 
         self.init_ui()
 
@@ -63,7 +64,7 @@ class MainWindow(QWidget):
             self.msg_edit.appendPlainText(f"{t}登录成功！")
         else:
             self.msg_edit.appendPlainText(f"{t}登录失败！{message}")
-        print("成功接收到信息并设置到plainttext")
+        print("成功接收到信息并设置到plaintext")
 
 
 class Login(QThread):
