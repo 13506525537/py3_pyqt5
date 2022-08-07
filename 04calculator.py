@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QLineEdit, QPushButton, QLayout, QGridLayout, QApplication, QVBoxLayout
+from PyQt5.QtGui import QIcon
 import sys
 
 
@@ -7,6 +8,7 @@ class Calculator(QWidget):
         super(Calculator, self).__init__()
 
         self.setWindowTitle("基础计算器")
+        self.setWindowIcon(QIcon("icon.png"))
         self.init_ui()
 
     def init_ui(self):
@@ -31,13 +33,13 @@ class Calculator(QWidget):
             value = data.get(key)
             for index, i in enumerate(value):
                 btn = QPushButton(i)
+                btn.setFixedSize(40, 40)
                 grid.addWidget(btn, key, index)
 
         layout.addWidget(edit)
         layout.addLayout(grid)
 
         self.setLayout(layout)
-
 
 
 if __name__ == '__main__':
