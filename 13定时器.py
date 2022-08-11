@@ -33,14 +33,28 @@ class MyLabel(QLabel):
         self.second = ms
 
 
+class BigLabel(QLabel):
+    def __init__(self, *args, **kwargs):
+        super(BigLabel, self).__init__(*args, **kwargs)
+        self.setStyleSheet("background-color:rgb(8,15,64); color:rgb(147,189,173)")
+
+    def start_timer(self):
+        self.time_id = self.startTimer(1000, Qt.VeryCoarseTimer)
+
+    def timerEvent(self, *args):
+        # self.resize(self.width()+20, self.height()+10)
+        self.setGeometry(self.x()-10,self.y()-5,self.width()+20, self.height()+10)
+
 class Mywindow(QWidget):
 
     def __init__(self, *args, **kwargs):
         super(Mywindow, self).__init__(*args, **kwargs)
+        self.setStyleSheet("QWidget{background-color:rgb(147,189,173)}")
         self.setup_ui()
 
     def setup_ui(self):
-        self.label展示10秒倒数计时()
+        # self.label展示10秒倒数计时()
+        self.label窗口随时间增大()
 
     def label展示10秒倒数计时(self):
         label = MyLabel("10", self)
@@ -54,6 +68,16 @@ class Mywindow(QWidget):
         # 绑定按钮和倒计时
         label.set_second(1000)
         btn.clicked.connect(label.timecount)
+
+    def label窗口随时间增大(self):
+        label = BigLabel("我会变大", self)
+        label.move(200, 250)
+
+        btn = QPushButton("点我变大", self)
+        btn.move(200, 270)
+
+        # 点我变大按扭
+        btn.clicked.connect(label.start_timer)
 
 
 if __name__ == '__main__':
