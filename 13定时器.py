@@ -14,6 +14,7 @@ class MyLabel(QLabel):
     def __init__(self, *args, **kwargs):
         super(MyLabel, self).__init__(*args, **kwargs)
         # self.i = 0
+        self.second = 1000
 
     def timerEvent(self, evt):
         # t = 10 - self.i
@@ -26,7 +27,10 @@ class MyLabel(QLabel):
         print(self.time_id)
 
     def timecount(self):
-        self.time_id = self.startTimer(1000)
+        self.time_id = self.startTimer(self.second)
+
+    def set_second(self, ms):
+        self.second = ms
 
 
 class Mywindow(QWidget):
@@ -48,6 +52,7 @@ class Mywindow(QWidget):
         btn.move(200, 270)
 
         # 绑定按钮和倒计时
+        label.set_second(1000)
         btn.clicked.connect(label.timecount)
 
 
