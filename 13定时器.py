@@ -13,15 +13,20 @@ class MyObject(QObject):
 class MyLabel(QLabel):
     def __init__(self, *args, **kwargs):
         super(MyLabel, self).__init__(*args, **kwargs)
-        self.i = 0
+        # self.i = 0
 
     def timerEvent(self, evt):
-        t = 10 - self.i
-        self.setText(str(t))
-        self.i += 1
-        if t == 0:
+        # t = 10 - self.i
+        current_sec = int(self.text())
+        current_sec -= 1
+        self.setText(str(current_sec))
+        # self.i += 1
+        if current_sec == 0:
             self.killTimer(self.time_id)
         print(self.time_id)
+
+    def timecount(self):
+        self.time_id = self.startTimer(1000)
 
 
 class Mywindow(QWidget):
@@ -34,9 +39,7 @@ class Mywindow(QWidget):
         self.label展示10秒倒数计时()
 
     def label展示10秒倒数计时(self):
-        label = MyLabel("倒计时10s")
-        self.label = label
-        label.setParent(self)
+        label = MyLabel("10", self)
         label.move(200, 250)
         label.setStyleSheet("font-size:22px")
 
@@ -45,11 +48,7 @@ class Mywindow(QWidget):
         btn.move(200, 270)
 
         # 绑定按钮和倒计时
-        btn.clicked.connect(self.timercount)
-
-    def timercount(self):
-        self.label.time_id = self.label.startTimer(1000)
-
+        btn.clicked.connect(label.timecount)
 
 
 if __name__ == '__main__':
