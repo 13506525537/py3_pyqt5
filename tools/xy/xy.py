@@ -28,7 +28,8 @@ class MyWidget(QWidget):
 class MyWindow(MyWidget):
     def __init__(self):
         super(MyWindow, self).__init__()
-        self.ui = uic.loadUi(sys.argv[0] + "/../xy.ui")
+        # self.ui = uic.loadUi(sys.argv[0] + "/../xy.ui")
+        self.ui = uic.loadUi("./xy.ui")
         print(self.ui.__dict__)
         self.x_label = self.ui.x_label
         self.y_label = self.ui.y_label
@@ -41,6 +42,11 @@ class MyWindow(MyWidget):
         self.frame_label = self.ui.frame_label
         self.move_btn = self.ui.move_btn
         self.resize_btn = self.ui.resize_btn
+
+        # 设置自适应
+        self.geometry_label.adjustSize()
+        self.frame_label.adjustSize()
+
 
         self.setup_ui()
 
