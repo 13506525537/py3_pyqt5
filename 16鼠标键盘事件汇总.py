@@ -8,7 +8,7 @@ class MyWindow(QWidget):
         super(MyWindow, self).__init__()
         self.setup_ui()
 
-# """重要：事件传递机制，事件如果对象没有处理，就会向父对象进行传递"""
+# """重要：事件传递机制，事件如果对象没有处理，就会向父对象进行传递，可以在Event方法中写入evt.ignore()方法告诉父对象事件并未被处理"""
     def setup_ui(self):
         pass
 
