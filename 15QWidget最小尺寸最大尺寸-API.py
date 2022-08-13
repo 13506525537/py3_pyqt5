@@ -17,7 +17,6 @@ if __name__ == '__main__':
     label.setContentsMargins(100, 200, 0, 0)  # 文本内容距边框的距离
     print(label.getContentsMargins())
 
-
     w.show()
 
     app.exec_()
