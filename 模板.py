@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QWidget, QApplication
 class MyWindow(QWidget):
     def __init__(self):
         super(MyWindow, self).__init__()
-
+        self.setup_ui()
     def setup_ui(self):
         pass
 

@@ -8,16 +8,13 @@ class MyWidget(QWidget):
     def mousePressEvent(self, evt):
         x = evt.x()
         y = evt.y()
-        child = self.childAt(x, y)
-        if child:
-            child.setStyleSheet("background-color:#758d71")
+        self.child = self.childAt(x, y)
+        if self.child:
+            self.child.setStyleSheet("background-color:#758d71")
 
     def mouseReleaseEvent(self, evt):
-        x = evt.x()
-        y = evt.y()
-        child = self.childAt(x, y)
-        if child:
-            child.setStyleSheet("background-color:#c8b7a6")
+        if self.child:
+            self.child.setStyleSheet("background-color:#c8b7a6")
 
 
 class MyWindow(MyWidget):
@@ -42,8 +39,8 @@ class MyWindow(MyWidget):
 
     def setup_ui(self):
         self.setWindowTitle("鼠标样式表")
-        self.resize(700, 500)
-        self.setStyleSheet("background-color:#c8b7a6")
+        self.resize(800, 500)
+        self.setStyleSheet("background-color:#c8b7a6;font-size:17px")
         self.move(500, 500)
         index = 0
         for key, value in self.mous_dict.items():
