@@ -47,7 +47,8 @@ class MyWindow(QMainWindow):
         le3.setFocus()
 
         # 设置焦点获取方式,一共四种获取焦点的模式
-        le2.setFocusPolicy(Qt.TabFocus)
+        Qt.TabFocus,Qt.ClickFocus,Qt.StrongFocus
+        le2.setFocusPolicy(Qt.StrongFocus)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
