@@ -47,6 +47,10 @@ class MyWindow(MyWidget):
                 btn1.setText("禁用按钮")
 
         def hidden():
+            # isHidden 是相对于父控件来说是否可以见
+            # isVisible 是最终控件是否可见
+            # isVisibleTo(widget) 如果能随着widget控件的显示和隐藏，如果同步变化则返回True，不能则返回False
+
             if btn.isHidden():
                 btn.setHidden(False)
                 btn2.setText("隐藏按钮")
@@ -57,6 +61,7 @@ class MyWindow(MyWidget):
 
         btn1.clicked.connect(enable)
         btn2.clicked.connect(hidden)
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
