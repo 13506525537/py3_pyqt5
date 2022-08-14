@@ -1,6 +1,7 @@
 import sys
 
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
+from PyQt5.QtCore import Qt
 
 
 class MyWidget(QWidget):
@@ -9,7 +10,7 @@ class MyWidget(QWidget):
         return super().paintEvent(evt)
 
 
-class MyWindow(MyWidget):
+class MyWindow(QWidget):
     def __init__(self):
         super(MyWindow, self).__init__()
         self.resize(500, 500)
@@ -17,7 +18,9 @@ class MyWindow(MyWidget):
         self.setup_ui()
 
     def setup_ui(self):
-        self.设置按钮交互状态()
+        # self.设置按钮交互状态()
+        self.设置窗口是否可编辑()
+        self.close方法是否能释放按钮验证()
 
     def 设置按钮交互状态(self):
         btn = QPushButton("确定", self)
@@ -29,7 +32,6 @@ class MyWindow(MyWidget):
 
         btn2 = QPushButton("隐藏按钮", self)
         btn2.move(140, 0)
-
 
         # # 设置按钮不可用
         # btn.setEnabled(False)
@@ -58,13 +60,36 @@ class MyWindow(MyWidget):
                 btn.setHidden(True)
                 btn2.setText("显示按钮")
 
-
         btn1.clicked.connect(enable)
         btn2.clicked.connect(hidden)
+
+    def 设置窗口是否可编辑(self):
+        # 先将标题设置为特定格式,[*]可以方任意位置
+        self.setWindowTitle("标题交互状态[*]")
+
+        # 设置窗口标题为交互状态
+        self.setWindowModified(False)
+        print(self.isWindowModified())  # 查询窗口是否为编辑状态，是返回True
+
+        print(self.isActiveWindow())  # 判定窗口是否为活跃窗口，以窗口边缘的光圈为准
+
+    def close方法是否能释放按钮验证(self):
+        # 实际上close()方法调用的是隐藏按钮的方法，只有设置了Qt.WA_DeleteOnClose,True才会释放
+        btn = QPushButton("关闭", self)
+        btn.setAttribute(Qt.WA_DeleteOnClose, True)
+        btn.destroyed.connect(lambda: print("按钮被释放了"))
+
+        btn.clicked.connect(btn.close)
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     w = MyWindow()
+
+    # w2 = QWidget()
+
+    # w2.show()
+    #
+    # print(w2.isActiveWindow())
     w.show()
     sys.exit(app.exec_())
