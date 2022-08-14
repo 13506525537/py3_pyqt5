@@ -1,6 +1,6 @@
 import sys
 
-from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
+from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QLabel, QLineEdit
 from PyQt5.QtCore import Qt
 
 
@@ -19,8 +19,9 @@ class MyWindow(QWidget):
 
     def setup_ui(self):
         # self.设置按钮交互状态()
-        self.设置窗口是否可编辑()
-        self.close方法是否能释放按钮验证()
+        # self.设置窗口是否可编辑()
+        # self.close方法是否能释放按钮验证()
+        self.窗口交互案例()
 
     def 设置按钮交互状态(self):
         btn = QPushButton("确定", self)
@@ -80,6 +81,40 @@ class MyWindow(QWidget):
         btn.destroyed.connect(lambda: print("按钮被释放了"))
 
         btn.clicked.connect(btn.close)
+
+    def 窗口交互案例(self):
+        edit = QLineEdit(self)
+        btn = QPushButton("确定提交", self)
+        label = QLabel(self)
+
+        # 调整按钮位置
+        edit.move(100, 100)
+        btn.move(240, 100)
+        label.move(100, 70)
+
+        # 设置标签隐藏，按钮禁用
+        label.setVisible(False)
+        btn.setEnabled(False)
+
+        def text_change():
+            if edit.text():
+                btn.setEnabled(True)
+            else:
+                btn.setEnabled(False)
+
+        def btn_clicked():
+            if edit.text() == "Sz":
+                label.setVisible(True)
+                label.setText("登录成功")
+                # 设置label自适应
+                label.adjustSize()
+
+            else:
+                label.setVisible(False)
+
+        # 绑定标签和信号
+        edit.textChanged.connect(text_change)
+        btn.clicked.connect(btn_clicked)
 
 
 if __name__ == '__main__':
