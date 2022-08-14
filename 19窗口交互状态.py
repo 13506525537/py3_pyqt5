@@ -93,14 +93,15 @@ class MyWindow(QWidget):
         label.move(100, 70)
 
         # 设置标签隐藏，按钮禁用
-        label.setVisible(False)
+        label.hide()
         btn.setEnabled(False)
 
-        def text_change():
-            if edit.text():
-                btn.setEnabled(True)
-            else:
-                btn.setEnabled(False)
+        def text_change(text):
+            # if text:
+            #     btn.setEnabled(True)
+            # else:
+            #     btn.setEnabled(False)
+            btn.setEnabled(len(text) > 0)
 
         def btn_clicked():
             if edit.text() == "Sz":
